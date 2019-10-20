@@ -29,12 +29,12 @@ public class ShoppingListController {
     }
 
     @GetMapping(path="/active")
-    public Response<ShoppingList> getActiveUserShoppingList(UserIdRequest request) {
+    public Response<ShoppingList> getActiveUserShoppingList(@Valid UserIdRequest request) {
         return this.shoppingListService.getActiveUserShoppingList(request);
     }
 
     @GetMapping(path="/all")
-    public Response<List<ShoppingList>> getAllUserShoppingLists(GetAllUserShoppingListsRequest request) {
+    public Response<List<ShoppingList>> getAllUserShoppingLists(@Valid GetAllUserShoppingListsRequest request) {
         return this.shoppingListService.getAllUserShoppingLists(request);
     }
 

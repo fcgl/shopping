@@ -4,6 +4,7 @@ import com.fcgl.madrid.shopping.dataModel.ShoppingProduct;
 import com.fcgl.madrid.shopping.payload.request.GetUserShoppingProductRequest;
 import com.fcgl.madrid.shopping.payload.request.NewShoppingProductRequest;
 import com.fcgl.madrid.shopping.payload.request.ToggleProductCompletedRequest;
+import com.fcgl.madrid.shopping.payload.request.UpdateNameRequest;
 import com.fcgl.madrid.shopping.payload.response.Response;
 import com.fcgl.madrid.shopping.service.ShoppingProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class ShoppingProductController {
     }
 
     @PostMapping(path = "/update/name")
-    public Response<ShoppingProduct> updateName() {
-        return this.shoppingProductService.updateName();
+    public Response<ShoppingProduct> updateName(UpdateNameRequest request) {
+        return this.shoppingProductService.updateName(request);
     }
 
 }
