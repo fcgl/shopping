@@ -30,7 +30,7 @@ public class ShoppingList {
     private Float totalPrice;
     private String summary;
 
-    @OneToMany(mappedBy = "shoppingListId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shoppingList", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<ShoppingProduct> shoppingProducts;
 
@@ -116,5 +116,13 @@ public class ShoppingList {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public List<ShoppingProduct> getShoppingProducts() {
+        return shoppingProducts;
+    }
+
+    public void setShoppingProducts(List<ShoppingProduct> shoppingProducts) {
+        this.shoppingProducts = shoppingProducts;
     }
 }

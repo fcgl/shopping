@@ -6,14 +6,18 @@ import javax.validation.constraints.NotNull;
 public class NewShoppingListRequest {
     @NotNull
     private Long userId;
-    @NotEmpty
     private String name;
     @NotNull
     private Boolean active;
+    private static final String DEFAULT_NAME = "default";
 
     public NewShoppingListRequest(Long userId, String name, Boolean active) {
         this.userId = userId;
-        this.name = name;
+        if (name == null || name.equals("")) {
+            this.name = DEFAULT_NAME;
+        } else {
+            this.name = name;
+        }
         this.active = active;
     }
 
