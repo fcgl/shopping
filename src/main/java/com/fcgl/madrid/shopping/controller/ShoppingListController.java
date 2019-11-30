@@ -1,12 +1,10 @@
 package com.fcgl.madrid.shopping.controller;
 
 import com.fcgl.madrid.shopping.dataModel.ShoppingList;
-import com.fcgl.madrid.shopping.payload.request.GetAllUserShoppingListsRequest;
-import com.fcgl.madrid.shopping.payload.request.GetUserShoppingListRequest;
-import com.fcgl.madrid.shopping.payload.request.NewShoppingListRequest;
-import com.fcgl.madrid.shopping.payload.request.UserIdRequest;
+import com.fcgl.madrid.shopping.payload.request.*;
 import com.fcgl.madrid.shopping.payload.response.Response;
 import com.fcgl.madrid.shopping.payload.response.ShoppingListNoProduct;
+import com.fcgl.madrid.shopping.payload.response.ShoppingListProductResponse;
 import com.fcgl.madrid.shopping.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
@@ -49,6 +47,11 @@ public class ShoppingListController {
         } else {
             return this.shoppingListService.getUserShoppingList(request);
         }
+    }
+
+    @PostMapping(path="/products")
+    public ResponseEntity<Response<ShoppingListProductResponse>> addShoppingListAndProducts(@Valid @RequestBody NewShoppingListWithProductsRequest request) {
+        return this.shoppingListService.addShoppingListAndProducts(request);
     }
 
 }
