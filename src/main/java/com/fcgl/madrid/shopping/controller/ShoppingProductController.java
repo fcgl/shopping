@@ -25,7 +25,7 @@ public class ShoppingProductController {
     }
 
     @PostMapping(path = "/new")
-    public Response<ShoppingProduct> addShoppingList(@Valid @RequestBody NewShoppingProductRequest request) {
+    public Response<ShoppingProduct> addShoppingProduct(@Valid @RequestBody NewShoppingProductRequest request) {
         return this.shoppingProductService.addShoppingProduct(request);
     }
 

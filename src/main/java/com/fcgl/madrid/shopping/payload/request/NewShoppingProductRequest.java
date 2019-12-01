@@ -11,19 +11,22 @@ public class NewShoppingProductRequest {
     private Long shoppingListId;
     @NotEmpty
     private String productName;
+    @NotNull
+    private Boolean isActive;
     private Float recommendedPrice;
     private Long recommendedStoreId;
     private Long recommendedProductId;
 
     public NewShoppingProductRequest(Long userId, Long shoppingListId, String productName,
                                      Float recommendedPrice, Long recommendedProductId,
-                                     Long recommendedStoreId) {
+                                     Long recommendedStoreId, Boolean isActive) {
         this.userId = userId;
         this.shoppingListId = shoppingListId;
         this.productName = productName;
         this.recommendedPrice = recommendedPrice;
         this.recommendedStoreId = recommendedStoreId;
         this.recommendedProductId = recommendedProductId;
+        this.isActive = isActive;
     }
 
     public Long getUserId() {
@@ -72,5 +75,13 @@ public class NewShoppingProductRequest {
 
     public void setRecommendedProductId(Long recommendedProductId) {
         this.recommendedProductId = recommendedProductId;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }

@@ -30,7 +30,12 @@ public class ShoppingProductService {
     }
 
     public Response<ShoppingProduct> addShoppingProduct(NewShoppingProductRequest request) {
-        Optional<ShoppingList> shoppingListOptional = this.shoppingListRepository.findById(request.getShoppingListId());
+        Optional<ShoppingList> shoppingListOptional;
+        if (request.getActive()) {
+            shoppingListOptional = this.shoppingListRepository.findByActiveTrueAndUserId(request.getUserId());
+        } else {
+            shoppingListOptional = this.shoppingListRepository.findById(request.getShoppingListId());
+        }
         if (!shoppingListOptional.isPresent()) {
             return new Response<>(InternalStatus.NOT_FOUND, null);
         }
@@ -38,7 +43,7 @@ public class ShoppingProductService {
         updateShoppingListOnProductAddition(request, shoppingList);
         ShoppingProduct shoppingProduct =
                 new ShoppingProduct(
-                        request.getUserId(), request.getShoppingListId(), request.getProductName(),
+                        request.getUserId(), shoppingList, request.getProductName(),
                         request.getRecommendedPrice(), request.getRecommendedStoreId(), request.getRecommendedProductId()
                 );
         this.shoppingProductRepository.save(shoppingProduct);
@@ -68,11 +73,7 @@ public class ShoppingProductService {
         if (shoppingProduct == null) {
             return new Response<>(InternalStatus.NOT_FOUND, null);
         }
-        Optional<ShoppingList> shoppingListOptional = this.shoppingListRepository.findById(shoppingProduct.getShoppingListId());
-        if (!shoppingListOptional.isPresent()) {
-            return new Response<>(InternalStatus.NOT_FOUND, null);
-        }
-        ShoppingList shoppingList = shoppingListOptional.get();
+        ShoppingList shoppingList = shoppingProduct.getShoppingList();
         shoppingProduct.setRecommendedPrice(request.getRecommendedPrice());
         shoppingProduct.setRecommendedProductId(request.getRecommendedProductId());
         shoppingProduct.setRecommendedStoreId(request.getRecommendedStoreId());

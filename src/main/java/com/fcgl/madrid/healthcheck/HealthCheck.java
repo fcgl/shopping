@@ -11,6 +11,6 @@ public class HealthCheck {
     @RequestMapping("/v1/marco")
     @ResponseStatus(HttpStatus.OK)
     public Health checkHealth() {
-        return new Health(1, "polo");
+        return new Health(1, "shopping service");
     }
 }

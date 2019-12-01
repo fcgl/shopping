@@ -20,7 +20,7 @@ public class ShoppingProduct {
     @JsonBackReference
     @NotNull
     @JoinColumn(name = "shoppingListId")
-    private Long shoppingListId;
+    private ShoppingList shoppingList;
     @NotEmpty
     private String productName;
     private Float recommendedPrice;
@@ -33,9 +33,9 @@ public class ShoppingProduct {
 
     }
 
-    public ShoppingProduct(Long userId, Long shoppingListId, String productName) {
+    public ShoppingProduct(Long userId, ShoppingList shoppingList, String productName) {
         this.userId = userId;
-        this.shoppingListId = shoppingListId;
+        this.shoppingList = shoppingList;
         this.productName = productName;
         this.recommendedPrice = null;
         this.recommendedProductId = null;
@@ -44,10 +44,10 @@ public class ShoppingProduct {
         this.completed = false;
     }
 
-    public ShoppingProduct(Long userId, Long shoppingListId, String productName,
+    public ShoppingProduct(Long userId, ShoppingList shoppingList, String productName,
             Float recommendedPrice, Long recommendedStoreId, Long recommendedProductId) {
         this.userId = userId;
-        this.shoppingListId = shoppingListId;
+        this.shoppingList = shoppingList;
         this.productName = productName;
         this.recommendedPrice = recommendedPrice;
         this.recommendedProductId = recommendedProductId;
@@ -72,12 +72,12 @@ public class ShoppingProduct {
         this.userId = userId;
     }
 
-    public Long getShoppingListId() {
-        return shoppingListId;
+    public ShoppingList getShoppingList() {
+        return shoppingList;
     }
 
-    public void setShoppingListId(Long shoppingListId) {
-        this.shoppingListId = shoppingListId;
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
 
     public String getProductName() {
